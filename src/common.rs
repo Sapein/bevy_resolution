@@ -28,10 +28,10 @@ impl CommonResolutions {
 impl From<CommonResolutions> for Resolution {
     fn from(value: CommonResolutions) -> Self {
         match value {
-            CommonResolutions::R360p => Resolution::R360p(AspectRatio::SIXTEEN_NINE),
-            CommonResolutions::R720p => Resolution::R720p(AspectRatio::SIXTEEN_NINE),
-            CommonResolutions::R1080p => Resolution::R1080p(AspectRatio::SIXTEEN_NINE),
-            CommonResolutions::R1440p => Resolution::R1440p(AspectRatio::SIXTEEN_NINE),
+            CommonResolutions::R360p => Resolution::from_height(360., AspectRatio::SIXTEEN_NINE),
+            CommonResolutions::R720p => Resolution::from_height(720., AspectRatio::SIXTEEN_NINE),
+            CommonResolutions::R1080p => Resolution::from_height(1080., AspectRatio::SIXTEEN_NINE),
+            CommonResolutions::R1440p => Resolution::from_height(1440., AspectRatio::SIXTEEN_NINE),
         }
     }
 }
@@ -83,16 +83,16 @@ pub mod common4x3 {
     impl From<CommonResolutions> for Resolution {
         fn from(value: CommonResolutions) -> Self {
             match value {
-                CommonResolutions::R360p => Resolution::R360p(AspectRatio::FOUR_THREE),
-                CommonResolutions::R480p => Resolution::R480p(AspectRatio::FOUR_THREE),
-                CommonResolutions::R720p => Resolution::R720p(AspectRatio::FOUR_THREE),
-                CommonResolutions::R1440p => Resolution::R1440p(AspectRatio::FOUR_THREE),
+                CommonResolutions::R360p => Resolution::from_height(360.,AspectRatio::FOUR_THREE),
+                CommonResolutions::R480p => Resolution::from_height(480.,AspectRatio::FOUR_THREE),
+                CommonResolutions::R720p => Resolution::from_height(720., AspectRatio::FOUR_THREE),
+                CommonResolutions::R1440p => Resolution::from_height(1440., AspectRatio::FOUR_THREE),
             }
         }
     }
 
     impl CommonResolutions {
-        /// Iterates through the pre-defined [`Resolutions`] variants
+        /// Iterates through the pre-defined [`CommonResolutions`] variants
         pub fn iter() -> impl Iterator<Item = CommonResolutions> {
             [
                 CommonResolutions::R360p,

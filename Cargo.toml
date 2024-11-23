@@ -9,3 +9,6 @@ bevy_window = { version = "0.15.0-rc.3", optional = true }
 
 [features]
 default = ["bevy_window"]
+
+[profile.dev]
+opt-level = 0
