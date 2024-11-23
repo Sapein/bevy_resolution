@@ -85,7 +85,7 @@ impl Resolution {
     pub fn change_width(mut self, width: f32, maintain_aspect_ratio: bool) -> Self {
         if maintain_aspect_ratio {
             if (width / self.height) != self.aspect_ratio().ratio() {
-                self.height = self.width / self.aspect_ratio().ratio()
+                self.height = width / self.aspect_ratio().ratio()
             }
         } else {
             self.aspect_ratio = AspectRatioMode::Dynamic;
