@@ -1,0 +1,11 @@
+[package]
+name = "bevy_resolutions"
+version = "0.1.0-rc.1"
+edition = "2021"
+
+[dependencies]
+bevy_math = "0.15.0-rc.3"
+bevy_window = { version = "0.15.0-rc.3", optional = true }
+
+[features]
+default = ["bevy_window"]
