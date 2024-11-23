@@ -1,6 +1,6 @@
 use bevy_math::AspectRatio;
-use bevy_resolution::resolutions::{r360p, r720p, Resolution};
 use bevy_resolution::common::common4x3::CommonResolutions;
+use bevy_resolution::resolutions::{r360p, r720p, Resolution};
 
 fn main() {
     let supported_resolutions = [
@@ -9,8 +9,8 @@ fn main() {
         r360p(AspectRatio::FOUR_THREE),
         r720p(AspectRatio::SIXTEEN_NINE),
     ];
-    
-    for resolutions in supported_resolutions{
+
+    for resolutions in supported_resolutions {
         println!("{}", resolutions);
     }
 

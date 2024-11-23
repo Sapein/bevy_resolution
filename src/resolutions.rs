@@ -52,7 +52,7 @@ impl Resolution {
             AspectRatioMode::Set(ar) => ar,
         }
     }
-    
+
     pub fn fits_aspect_ratio(&self, aspect_ratio: &AspectRatio) -> bool {
         fits_aspect_ratio(self.height, aspect_ratio)
     }
@@ -375,17 +375,23 @@ mod tests {
             Some(r720p(AspectRatio::SIXTEEN_NINE))
         );
     }
-    
+
     #[test]
     fn changes() {
         let r360 = r360p(AspectRatio::SIXTEEN_NINE);
-        
+
         assert_eq!(r360.change_height(720., false).width(), 640.);
         assert_eq!(r360.change_height(720., true).width(), 1280.);
         assert_eq!(r360.change_width(1280., true).height(), 720.);
         assert_eq!(r360.change_width(1280., false).height(), 360.);
-        assert_eq!(UVec2::from(r360.change_ratio(AspectRatio::FOUR_THREE)), UVec2::new(480, 360));
-        assert_eq!(UVec2::from(r360.change_ratio(AspectRatio::ULTRAWIDE)), UVec2::new(840, 360));
+        assert_eq!(
+            UVec2::from(r360.change_ratio(AspectRatio::FOUR_THREE)),
+            UVec2::new(480, 360)
+        );
+        assert_eq!(
+            UVec2::from(r360.change_ratio(AspectRatio::ULTRAWIDE)),
+            UVec2::new(840, 360)
+        );
     }
 
     #[cfg(feature = "bevy_window")]

@@ -8,7 +8,8 @@ fn main() {
         r360p(AspectRatio::SIXTEEN_NINE),
         r360p(AspectRatio::FOUR_THREE),
         r720p(AspectRatio::SIXTEEN_NINE),
-    ].map(|r| WindowResolution::from(r));
+    ]
+    .map(|r| WindowResolution::from(r));
 
     for resolutions in supported_resolutions {
         println!("{:?}", resolutions);
