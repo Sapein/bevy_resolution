@@ -1,2 +1,2 @@
-pub mod resolutions;
 pub mod common;
+pub mod resolutions;

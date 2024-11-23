@@ -1,7 +1,7 @@
-use std::fmt::{Display, Formatter};
 use bevy_math::{AspectRatio, UVec2, Vec2};
+use std::fmt::{Display, Formatter};
 
-/// Represents a specific resolution 
+/// Represents a specific resolution
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Resolution {
     width: f32,
@@ -19,7 +19,7 @@ impl AspectRatioMode {
     fn is_dynamic(&self) -> bool {
         match self {
             AspectRatioMode::Dynamic => true,
-            _ => false
+            _ => false,
         }
     }
 }
@@ -32,7 +32,7 @@ impl Resolution {
             aspect_ratio: AspectRatioMode::Dynamic,
         }
     }
-    
+
     pub fn from_height(height: f32, aspect_ratio: AspectRatio) -> Self {
         Resolution {
             height,
@@ -40,7 +40,7 @@ impl Resolution {
             aspect_ratio: AspectRatioMode::Set(aspect_ratio),
         }
     }
-    
+
     pub fn from_width(width: f32, aspect_ratio: AspectRatio) -> Self {
         Resolution {
             width,
@@ -48,33 +48,33 @@ impl Resolution {
             aspect_ratio: AspectRatioMode::Set(aspect_ratio),
         }
     }
-    
+
     pub fn aspect_ratio(&self) -> AspectRatio {
         match self.aspect_ratio {
             AspectRatioMode::Dynamic => AspectRatio::try_new(self.width, self.height).unwrap(),
-            AspectRatioMode::Set(ar) => ar
+            AspectRatioMode::Set(ar) => ar,
         }
     }
-    
+
     pub fn has_integer_scale(&self, target_resolution: &Resolution) -> bool {
         has_integer_scale(self, target_resolution)
     }
-    
+
     pub fn scale_factor(&self, target_resolution: &Resolution) -> Vec2 {
         get_scale_factor(self, target_resolution)
     }
-    
+
     pub fn change_height(mut self, height: f32, maintain_aspect_ratio: bool) -> Self {
         if maintain_aspect_ratio {
             if (self.width / height) != self.aspect_ratio().ratio() {
                 self.width = height * self.aspect_ratio().ratio()
-            } 
+            }
         }
         self.height = height;
-        
+
         self
     }
-    
+
     pub fn change_width(mut self, width: f32, maintain_aspect_ratio: bool) -> Self {
         if maintain_aspect_ratio {
             if (width / self.height) != self.aspect_ratio().ratio() {
@@ -83,38 +83,38 @@ impl Resolution {
         } else {
             self.aspect_ratio = AspectRatioMode::Dynamic;
         }
-        
+
         self.width = width;
 
         self
     }
-    
+
     pub fn change_ratio(mut self, ratio: AspectRatio) -> Self {
         self.aspect_ratio = AspectRatioMode::Set(ratio);
         self.width = self.height * ratio.ratio();
-        
+
         self
     }
-    
+
     pub fn can_fit(&self, aspect_ratio: &AspectRatio) -> bool {
         resolution_fits_aspect_ratio(self, aspect_ratio)
     }
-    
+
     pub fn scale_and_keep_aspect_ratio(self, scalar: Vec2) -> Option<Self> {
-        if (self.width*scalar.x)/(self.height*scalar.y) != self.aspect_ratio().ratio() {
-            return None
+        if (self.width * scalar.x) / (self.height * scalar.y) != self.aspect_ratio().ratio() {
+            return None;
         }
 
         Some(Self {
             width: self.width * scalar.x,
             height: self.height * scalar.y,
-            aspect_ratio: self.aspect_ratio
+            aspect_ratio: self.aspect_ratio,
         })
     }
-    
+
     pub fn scale(self, scalar: Vec2) -> Self {
         let ratio = (self.width * scalar.x) / (self.height * scalar.y);
-        
+
         if self.aspect_ratio.is_dynamic() || self.aspect_ratio().ratio() == ratio {
             Self {
                 width: self.width * scalar.x,
@@ -125,14 +125,16 @@ impl Resolution {
             Self {
                 width: self.width * scalar.x,
                 height: self.height * scalar.y,
-                aspect_ratio: AspectRatioMode::Dynamic
+                aspect_ratio: AspectRatioMode::Dynamic,
             }
         }
     }
 }
 
 pub fn has_integer_scale(to: &Resolution, from: &Resolution) -> bool {
-    if from.aspect_ratio().ratio() != to.aspect_ratio().ratio() { return false }
+    if from.aspect_ratio().ratio() != to.aspect_ratio().ratio() {
+        return false;
+    }
 
     if from.height < to.height {
         (to.height / from.height) % 1. == 0.
@@ -178,7 +180,7 @@ impl From<Resolution> for Vec2 {
 }
 impl From<Resolution> for UVec2 {
     fn from(value: Resolution) -> Self {
-        UVec2::new(value.width.ceil() as u32, value.height.ceil() as  u32)
+        UVec2::new(value.width.ceil() as u32, value.height.ceil() as u32)
     }
 }
 impl From<Resolution> for AspectRatio {
@@ -187,8 +189,7 @@ impl From<Resolution> for AspectRatio {
     }
 }
 
-
-#[cfg(feature="bevy_window")]
+#[cfg(feature = "bevy_window")]
 impl From<Resolution> for bevy_window::WindowResolution {
     fn from(value: Resolution) -> Self {
         bevy_window::WindowResolution::from(Vec2::from(value))
@@ -216,15 +217,36 @@ mod tests {
 
     #[test]
     fn can_integer_scale() {
-        assert!(!has_integer_scale(&r360p(AspectRatio::FOUR_THREE), &r480p(AspectRatio::FOUR_THREE)));
-        assert!(has_integer_scale(&r360p(AspectRatio::SIXTEEN_NINE), &r720p(AspectRatio::SIXTEEN_NINE)));
-        assert!(!has_integer_scale(&r360p(AspectRatio::SIXTEEN_NINE), &r720p(AspectRatio::FOUR_THREE)));
+        assert!(!has_integer_scale(
+            &r360p(AspectRatio::FOUR_THREE),
+            &r480p(AspectRatio::FOUR_THREE)
+        ));
+        assert!(has_integer_scale(
+            &r360p(AspectRatio::SIXTEEN_NINE),
+            &r720p(AspectRatio::SIXTEEN_NINE)
+        ));
+        assert!(!has_integer_scale(
+            &r360p(AspectRatio::SIXTEEN_NINE),
+            &r720p(AspectRatio::FOUR_THREE)
+        ));
     }
 
     #[test]
     fn get_scale() {
-        assert_eq!(get_scale_factor(&r360p(AspectRatio::SIXTEEN_NINE), &r720p(AspectRatio::SIXTEEN_NINE)), Vec2::splat(2.));
-        assert_eq!(get_scale_factor(&r720p(AspectRatio::SIXTEEN_NINE), &r360p(AspectRatio::SIXTEEN_NINE)), Vec2::splat(0.5));
+        assert_eq!(
+            get_scale_factor(
+                &r360p(AspectRatio::SIXTEEN_NINE),
+                &r720p(AspectRatio::SIXTEEN_NINE)
+            ),
+            Vec2::splat(2.)
+        );
+        assert_eq!(
+            get_scale_factor(
+                &r720p(AspectRatio::SIXTEEN_NINE),
+                &r360p(AspectRatio::SIXTEEN_NINE)
+            ),
+            Vec2::splat(0.5)
+        );
     }
 
     #[test]
@@ -298,7 +320,6 @@ mod tests {
 
     #[test]
     fn aspect_ratio() {
-
         let r360 = r360p(AspectRatio::SIXTEEN_NINE).into();
 
         let r480 = r480p(AspectRatio::FOUR_THREE).into();
@@ -323,19 +344,28 @@ mod tests {
 
         assert_eq!(AspectRatio::SIXTEEN_NINE, r360);
     }
-    
+
     #[test]
     fn scale() {
         let r360 = r360p(AspectRatio::SIXTEEN_NINE);
-        
-        assert_eq!(Vec2::from(r360.scale(Vec2::new(1., 2.))), Vec2::new(640., 720.));
-        assert_eq!(r360.scale(Vec2::splat(2.)), r720p(AspectRatio::SIXTEEN_NINE));
-        
+
+        assert_eq!(
+            Vec2::from(r360.scale(Vec2::new(1., 2.))),
+            Vec2::new(640., 720.)
+        );
+        assert_eq!(
+            r360.scale(Vec2::splat(2.)),
+            r720p(AspectRatio::SIXTEEN_NINE)
+        );
+
         assert_eq!(r360.scale_and_keep_aspect_ratio(Vec2::new(1., 2.)), None);
-        assert_eq!(r360.scale_and_keep_aspect_ratio(Vec2::splat(2.)), Some(r720p(AspectRatio::SIXTEEN_NINE)));
+        assert_eq!(
+            r360.scale_and_keep_aspect_ratio(Vec2::splat(2.)),
+            Some(r720p(AspectRatio::SIXTEEN_NINE))
+        );
     }
 
-    #[cfg(feature="bevy_window")]
+    #[cfg(feature = "bevy_window")]
     #[test]
     fn resolution_to_window() {
         let r360_1 = r360p(AspectRatio::SIXTEEN_NINE).into();

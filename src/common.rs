@@ -1,6 +1,6 @@
-use std::fmt::{Display, Formatter};
-use bevy_math::{AspectRatio, UVec2, Vec2};
 use crate::resolutions::Resolution;
+use bevy_math::{AspectRatio, UVec2, Vec2};
+use std::fmt::{Display, Formatter};
 
 /// These represent Common Resolutions without needing to figure out the Aspect Ratio, these are all
 /// assumed to be 16:9.
@@ -21,7 +21,8 @@ impl CommonResolutions {
             CommonResolutions::R720p,
             CommonResolutions::R1080p,
             CommonResolutions::R1440p,
-        ].into_iter()
+        ]
+        .into_iter()
     }
 }
 
@@ -36,7 +37,7 @@ impl From<CommonResolutions> for Resolution {
     }
 }
 
-#[cfg(feature="bevy_window")]
+#[cfg(feature = "bevy_window")]
 impl From<CommonResolutions> for bevy_window::WindowResolution {
     fn from(value: CommonResolutions) -> Self {
         bevy_window::WindowResolution::from(Vec2::from(value))
@@ -64,9 +65,9 @@ impl Display for CommonResolutions {
 
 /// These provide additional Resolutions that, while common, are in 4:3.
 pub mod common4x3 {
-    use std::fmt::{Display, Formatter};
-    use bevy_math::{AspectRatio, UVec2, Vec2};
     use crate::resolutions::Resolution;
+    use bevy_math::{AspectRatio, UVec2, Vec2};
+    use std::fmt::{Display, Formatter};
 
     /// Provides an alternative CommonResolutions that are 4:3 instead of 16:9
     ///
@@ -83,10 +84,12 @@ pub mod common4x3 {
     impl From<CommonResolutions> for Resolution {
         fn from(value: CommonResolutions) -> Self {
             match value {
-                CommonResolutions::R360p => Resolution::from_height(360.,AspectRatio::FOUR_THREE),
-                CommonResolutions::R480p => Resolution::from_height(480.,AspectRatio::FOUR_THREE),
+                CommonResolutions::R360p => Resolution::from_height(360., AspectRatio::FOUR_THREE),
+                CommonResolutions::R480p => Resolution::from_height(480., AspectRatio::FOUR_THREE),
                 CommonResolutions::R720p => Resolution::from_height(720., AspectRatio::FOUR_THREE),
-                CommonResolutions::R1440p => Resolution::from_height(1440., AspectRatio::FOUR_THREE),
+                CommonResolutions::R1440p => {
+                    Resolution::from_height(1440., AspectRatio::FOUR_THREE)
+                }
             }
         }
     }
@@ -99,13 +102,14 @@ pub mod common4x3 {
                 CommonResolutions::R480p,
                 CommonResolutions::R720p,
                 CommonResolutions::R1440p,
-            ].into_iter()
+            ]
+            .into_iter()
         }
     }
 
     impl Display for CommonResolutions {
         fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-            let res = UVec2::from(Resolution::from(*self)) ;
+            let res = UVec2::from(Resolution::from(*self));
             write!(f, "{} x {}", res.x, res.y)
         }
     }
@@ -116,14 +120,13 @@ pub mod common4x3 {
         }
     }
 
-
     impl From<CommonResolutions> for Vec2 {
         fn from(value: CommonResolutions) -> Self {
             Vec2::from(Resolution::from(value))
         }
     }
 
-    #[cfg(feature="bevy_window")]
+    #[cfg(feature = "bevy_window")]
     impl From<CommonResolutions> for bevy_window::WindowResolution {
         fn from(value: CommonResolutions) -> Self {
             bevy_window::WindowResolution::from(Vec2::from(value))
@@ -170,7 +173,7 @@ pub mod common4x3 {
             assert_eq!(iter[3], CommonResolutions::R1440p.into());
         }
 
-        #[cfg(feature="bevy_window")]
+        #[cfg(feature = "bevy_window")]
         #[test]
         fn resolution_to_window() {
             let r360 = CommonResolutions::R360p.into();
@@ -223,7 +226,7 @@ mod tests {
         assert_eq!(iter[3], CommonResolutions::R1440p.into());
     }
 
-    #[cfg(feature="bevy_window")]
+    #[cfg(feature = "bevy_window")]
     #[test]
     fn resolution_to_window() {
         let r360 = CommonResolutions::R360p.into();
