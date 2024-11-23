@@ -26,6 +26,10 @@ name = "scaling"
 path = "examples/scaling.rs"
 
 [[example]]
+name = "changing"
+path = "examples/changes.rs"
+
+[[example]]
 name = "window"
 path = "examples/windows.rs"
 required-features = ["bevy_window"]
