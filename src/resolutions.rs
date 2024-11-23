@@ -1,10 +1,7 @@
 use std::fmt::{Display, Formatter};
 use bevy_math::{AspectRatio, UVec2, Vec2};
 
-/// Represents abstract resolutions for a given aspect ratio.
-///
-///
-/// Custom provides support for resolutions that aren't listed.
+/// Represents a specific resolution 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Resolution {
     width: f32,
