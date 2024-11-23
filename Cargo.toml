@@ -1,7 +1,14 @@
 [package]
-name = "bevy_resolutions"
+name = "bevy_resolution"
 version = "0.1.0-rc.1"
 edition = "2021"
+categories = ["game-development"]
+description = "An easy to use convienence crate for dealing with resolutins in Bevy"
+keywords = ["bevy", "resolution", "gamedev", "game"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/sapein/bevy_resolution"
+readme = "README.md"
+
 
 [dependencies]
 bevy_math = "0.15.0-rc.3"
@@ -9,6 +16,3 @@ bevy_window = { version = "0.15.0-rc.3", optional = true }
 
 [features]
 default = ["bevy_window"]
-
-[profile.dev]
-opt-level = 0
