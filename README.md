@@ -21,9 +21,6 @@ This crate exposes the following feature flags:
 
 The `bevy_window` feature is enabled by default.
 
-## Examples
-TODO
-
 ## Acknowledgements  
 I just want to thank the people who gave feedback on the initial Issue/PR even if it didn't make it in. That feedback
 did shape and affect the overall design of this crate.
