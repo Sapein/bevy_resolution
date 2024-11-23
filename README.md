@@ -1,5 +1,5 @@
-# Bevy Resolutions
- Bevy Resolutions aims to provide a simple, easy, and convenient way to set and manage window resolutions. It provides
+# bevy_resolution
+ `bevy_resolution` aims to provide a simple, easy, and convenient way to set and manage window resolutions. It provides
 conveniences for commonly-supported Window Resolutions *and* also provides a way to manage window resolution scaling for
 arbitrary resolutions.
 
