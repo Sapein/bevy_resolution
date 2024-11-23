@@ -55,6 +55,14 @@ impl Resolution {
             AspectRatioMode::Set(ar) => ar,
         }
     }
+    
+    pub fn height(&self) -> f32 {
+        self.height
+    }
+    
+    pub fn width(&self) -> f32 {
+        self.width
+    }
 
     pub fn has_integer_scale(&self, target_resolution: &Resolution) -> bool {
         has_integer_scale(self, target_resolution)
