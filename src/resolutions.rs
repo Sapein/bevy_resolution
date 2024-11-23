@@ -52,6 +52,10 @@ impl Resolution {
             AspectRatioMode::Set(ar) => ar,
         }
     }
+    
+    pub fn fits_aspect_ratio(&self, aspect_ratio: &AspectRatio) -> bool {
+        fits_aspect_ratio(self.height, aspect_ratio)
+    }
 
     pub fn height(&self) -> f32 {
         self.height
