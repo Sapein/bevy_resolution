@@ -16,3 +16,16 @@ bevy_window = { version = "0.15.0-rc.3", optional = true }
 
 [features]
 default = ["bevy_window"]
+
+[[example]]
+name = "basic"
+path = "examples/basic.rs"
+
+[[example]]
+name = "scaling"
+path = "examples/scaling.rs"
+
+[[example]]
+name = "window"
+path = "examples/windows.rs"
+required-features = ["bevy_window"]
