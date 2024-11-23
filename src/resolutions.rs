@@ -17,10 +17,7 @@ enum AspectRatioMode {
 
 impl AspectRatioMode {
     fn is_dynamic(&self) -> bool {
-        match self {
-            AspectRatioMode::Dynamic => true,
-            _ => false,
-        }
+        matches!(self, AspectRatioMode::Dynamic)
     }
 }
 
@@ -55,11 +52,11 @@ impl Resolution {
             AspectRatioMode::Set(ar) => ar,
         }
     }
-    
+
     pub fn height(&self) -> f32 {
         self.height
     }
-    
+
     pub fn width(&self) -> f32 {
         self.width
     }
@@ -77,6 +74,8 @@ impl Resolution {
             if (self.width / height) != self.aspect_ratio().ratio() {
                 self.width = height * self.aspect_ratio().ratio()
             }
+        } else {
+            self.aspect_ratio = AspectRatioMode::Dynamic;
         }
         self.height = height;
 
