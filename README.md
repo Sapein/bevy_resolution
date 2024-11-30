@@ -2,7 +2,6 @@
 [![Crates.io](https://img.shields.io/crates/v/bevy_resolution)](https://crates.io/crates/bevy_resolution)
 [![docs.rs](https://docs.rs/bevy_resolution/badge.svg)](https://docs.rs/bevy_resolution/)
 ![License](https://img.shields.io/crates/l/bevy_resolution)
-![Bevy Version](https://img.shields.io/badge/bevy%20version-0.15.0--rc.3-blue)
 
  `bevy_resolution` aims to provide a simple, easy, and convenient way to set and manage window resolutions. It provides
 conveniences for commonly-supported Window Resolutions *and* also provides a way to manage window resolution scaling for
