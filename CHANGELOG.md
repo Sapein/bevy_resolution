@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2025-10-03
+- Update to Bevy 0.17
+
 ## [0.2.0] - 2025-05-10
 - Updated to Bevy 0.16
 - Removed Bevy Version Badge from README.md as it is no longer useful.

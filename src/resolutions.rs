@@ -203,7 +203,7 @@ impl From<Resolution> for AspectRatio {
 #[cfg(feature = "bevy_window")]
 impl From<Resolution> for bevy_window::WindowResolution {
     fn from(value: Resolution) -> Self {
-        bevy_window::WindowResolution::from(Vec2::from(value))
+        bevy_window::WindowResolution::from(UVec2::from(value))
     }
 }
 
@@ -400,7 +400,7 @@ mod tests {
         let r360_1 = r360p(AspectRatio::SIXTEEN_NINE).into();
         let r360_2 = r360p(AspectRatio::FOUR_THREE).into();
 
-        assert_eq!(bevy_window::WindowResolution::new(640., 360.), r360_1);
-        assert_eq!(bevy_window::WindowResolution::new(480., 360.), r360_2);
+        assert_eq!(bevy_window::WindowResolution::new(640, 360), r360_1);
+        assert_eq!(bevy_window::WindowResolution::new(480, 360), r360_2);
     }
 }

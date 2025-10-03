@@ -40,7 +40,7 @@ impl From<CommonResolutions> for Resolution {
 #[cfg(feature = "bevy_window")]
 impl From<CommonResolutions> for bevy_window::WindowResolution {
     fn from(value: CommonResolutions) -> Self {
-        bevy_window::WindowResolution::from(Vec2::from(value))
+        bevy_window::WindowResolution::from(UVec2::from(value))
     }
 }
 
@@ -129,7 +129,7 @@ pub mod common4x3 {
     #[cfg(feature = "bevy_window")]
     impl From<CommonResolutions> for bevy_window::WindowResolution {
         fn from(value: CommonResolutions) -> Self {
-            bevy_window::WindowResolution::from(Vec2::from(value))
+            bevy_window::WindowResolution::from(UVec2::from(value))
         }
     }
 
@@ -178,7 +178,7 @@ pub mod common4x3 {
         fn resolution_to_window() {
             let r360 = CommonResolutions::R360p.into();
 
-            assert_eq!(bevy_window::WindowResolution::new(480., 360.), r360);
+            assert_eq!(bevy_window::WindowResolution::new(480, 360), r360);
         }
     }
 }
@@ -231,6 +231,6 @@ mod tests {
     fn resolution_to_window() {
         let r360 = CommonResolutions::R360p.into();
 
-        assert_eq!(bevy_window::WindowResolution::new(640., 360.), r360);
+        assert_eq!(bevy_window::WindowResolution::new(640, 360), r360);
     }
 }
