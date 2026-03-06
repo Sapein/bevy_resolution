@@ -24,6 +24,7 @@ The `bevy_window` feature is enabled by default.
 |          0.1.0          |     0.15     |
 |          0.2.0          |     0.16     |
 |          0.3.0          |     0.17     |
+|          0.4.0          |     0.18     |
 
 ## Acknowledgements  
 I just want to thank the people who gave feedback on the initial Issue/PR even if it didn't make it in. That feedback
