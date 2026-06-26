@@ -2,7 +2,7 @@
 //! resolutions. It provides conveniences for commonly-supported Window Resolutions *and* also
 //! provides a way to manage window resolution scaling for arbitrary resolutions.
 //!
-//! This crate requires bevy version `0.18`.
+//! This crate requires bevy version `0.19`.
 //! release candidate.
 //!
 //! ## Features
